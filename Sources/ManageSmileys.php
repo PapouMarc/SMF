@@ -10,7 +10,7 @@
  * @copyright 2025 Simple Machines and individual contributors
  * @license https://www.simplemachines.org/about/smf/license.php BSD
  *
- * @version 2.1.5
+ * @version 2.1.6
  */
 
 if (!defined('SMF'))
@@ -633,7 +633,7 @@ function AddSmiley()
 			FROM {db_prefix}smileys
 			WHERE code = {raw:mysql_binary_statement} {string:smiley_code}',
 			array(
-				'mysql_binary_statement' => $smcFunc['db_title'] == MYSQL_TITLE ? 'BINARY' : '',
+				'mysql_binary_statement' => in_array($smcFunc['db_title'], [MYSQL_TITLE, MARIADB_TITLE]) ? 'BINARY' : '',
 				'smiley_code' => $_POST['smiley_code'],
 			)
 		);
@@ -1113,7 +1113,7 @@ function EditSmileys()
 						AND id_smiley != {int:current_smiley}'),
 					array(
 						'current_smiley' => $_POST['smiley'],
-						'mysql_binary_type' => $smcFunc['db_title'] == MYSQL_TITLE ? 'BINARY' : '',
+						'mysql_binary_type' => in_array($smcFunc['db_title'], [MYSQL_TITLE, MARIADB_TITLE]) ? 'BINARY' : '',
 						'smiley_code' => $_POST['smiley_code'],
 					)
 				);

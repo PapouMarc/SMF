@@ -34,6 +34,9 @@ if (!defined('POSTGRE_TITLE'))
 if (!defined('MYSQL_TITLE'))
 	define('MYSQL_TITLE', 'MySQL');
 
+if (!defined('MARIADB_TITLE'))
+	define('MARIADB_TITLE', 'MariaDB');
+
 if (!defined('SMF_USER_AGENT'))
 	define('SMF_USER_AGENT', 'Mozilla/5.0 (' . php_uname('s') . ' ' . php_uname('m') . ') AppleWebKit/605.1.15 (KHTML, like Gecko)  SMF/' . strtr(SMF_VERSION, ' ', '.'));
 

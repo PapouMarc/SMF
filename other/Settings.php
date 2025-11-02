@@ -77,7 +77,7 @@ $cookiename = 'SMFCookie11';
  *
  * @var string
  */
-$db_type = 'mysql';
+$db_type = 'mariadb';
 /**
  * The database port
  * 0 to use default port for the database type

@@ -16,6 +16,7 @@ by signing off your contributions, you acknowledge that you can and do license y
 
 ## Branches organization:
 * ***release-2.1*** - is the branch where updates for version 2.1 are applied
+* ***release-2.1-mariadb*** - is the branch where updates for version 2.1 mariadb are applied
 
 ## How to contribute:
 * fork the repository. If you are not used to Github, please check out [fork a repository](https://help.github.com/fork-a-repo).
@@ -27,6 +28,7 @@ by signing off your contributions, you acknowledge that you can and do license y
 
 ## How to submit a pull request:
 * If you want to send a bug fix for version 2.1, send it to the branch ***release-2.1***
+* If you want to send a bug fix for version 2.1 mariadb, send it to the branch ***release-2.1-mariadb***
 
 ## Security matters:
 

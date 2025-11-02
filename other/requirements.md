@@ -25,10 +25,13 @@
 - fileinfo extension
 
 ## Database Engine
-### [MySQL](http://www.mysql.com)
+### [MariaDB](https://mariadb.org/)
+- MariaDB 10.1.0
+
+### [MySQL](https://www.mysql.com)
 - MySQL 5.6
 
-### [PostgreSQL](http://www.postgresql.org)
+### [PostgreSQL](https://www.postgresql.org)
 - PostgreSQL 9.6
 - standard_conforming_strings must be set to on
 

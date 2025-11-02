@@ -21,6 +21,7 @@ define('SMF_INSTALLING', 1);
 define('JQUERY_VERSION', '3.6.3');
 define('POSTGRE_TITLE', 'PostgreSQL');
 define('MYSQL_TITLE', 'MySQL');
+define('MARIADB_TITLE', 'MariaDB');
 define('SMF_USER_AGENT', 'Mozilla/5.0 (' . php_uname('s') . ' ' . php_uname('m') . ') AppleWebKit/605.1.15 (KHTML, like Gecko)  SMF/' . strtr(SMF_VERSION, ' ', '.'));
 if (!defined('TIME_START'))
 	define('TIME_START', microtime(true));
@@ -38,6 +39,17 @@ $GLOBALS['required_php_version'] = '7.1.0';
  * @var array
  */
 $databases = array(
+	'mariadb' => array(
+		'name' => 'MariaDB',
+		'version' => '10.1.0',
+		'version_check' => function() {
+			global $db_connection;
+			if (!function_exists('mysqli_fetch_row'))
+				return false;
+			return explode("-MariaDB-", mysqli_fetch_row(mysqli_query($db_connection, 'SELECT VERSION();'))[0])[0];
+		},
+		'alter_support' => true,
+	),
 	'mysql' => array(
 		'name' => 'MySQL',
 		'version' => '5.6.0',

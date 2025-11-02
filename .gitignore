@@ -51,7 +51,6 @@ custom_avatar/
 # Logs and databases #
 ######################
 *.log
-*.sql
 *.sqlite
 *.session
 
