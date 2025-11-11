@@ -872,6 +872,8 @@ function DatabaseSettings()
 			// For MySQL, we can get the "default port" from PHP. PostgreSQL has no such option though.
 			if (($db_type == 'mysql' || $db_type == 'mysqli') && $_POST['db_port'] != ini_get($db_type . '.default_port'))
 				$vars['db_port'] = (int) $_POST['db_port'];
+			elseif (($db_type == 'mariadb') && $_POST['db_port'] != ini_get($db_type . '.default_port'))
+				$vars['db_port'] = (int) $_POST['db_port'];
 			elseif ($db_type == 'postgresql' && $_POST['db_port'] != 5432)
 				$vars['db_port'] = (int) $_POST['db_port'];
 		}
@@ -1219,7 +1221,7 @@ function DatabasePopulation()
 	$replaces['{$default_reserved_names}'] = strtr($replaces['{$default_reserved_names}'], array('\\\\n' => '\\n'));
 
 	// MySQL-specific stuff - storage engine and UTF8 handling
-	if (substr($db_type, 0, 5) == 'mysql')
+	if ((substr($db_type, 0, 5) == 'mysql') || (substr($db_type, 0, 7) == 'mariadb'))
 	{
 		// Just in case the query fails for some reason...
 		$engines = array();
@@ -1298,7 +1300,7 @@ function DatabasePopulation()
 		{
 			// Error 1050: Table already exists!
 			// @todo Needs to be made better!
-			if ((($db_type != 'mysql' && $db_type != 'mysqli') || mysqli_errno($db_connection) == 1050) && preg_match('~^\s*CREATE TABLE ([^\s\n\r]+?)~', $current_statement, $match) == 1)
+			if ((($db_type != 'mysql' && $db_type != 'mysqli' && $db_type != 'mariadb') || mysqli_errno($db_connection) == 1050) && preg_match('~^\s*CREATE TABLE ([^\s\n\r]+?)~', $current_statement, $match) == 1)
 			{
 				$exists[] = $match[1];
 				$incontext['sql_results']['table_dups']++;
@@ -1494,7 +1496,7 @@ function DatabasePopulation()
 	}
 
 	// MySQL specific stuff
-	if (substr($db_type, 0, 5) != 'mysql')
+	if (substr($db_type, 0, 5) != 'mysql' && substr($db_type, 0, 7) != 'mariadb')
 		return false;
 
 	// Find database user privileges.
